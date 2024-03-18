@@ -1,8 +1,12 @@
-package com.yhh.springboot_hbase_ifc.controller;
+package com.yhh.springboot_hbase_ifc.controller.system;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yhh.springboot_hbase_ifc.model.dto.LoginDto;
 import com.yhh.springboot_hbase_ifc.model.entity.User;
-import com.yhh.springboot_hbase_ifc.service.UserService;
+import com.yhh.springboot_hbase_ifc.model.vo.LoginVo;
+import com.yhh.springboot_hbase_ifc.model.vo.Result;
+import com.yhh.springboot_hbase_ifc.model.vo.ResultCodeEnum;
+import com.yhh.springboot_hbase_ifc.service.system.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +23,31 @@ public class UserController {
     public List<User> index() {
         return userService.selectAll();
     }
+
     // 登录
     @PostMapping("/login")
     // 前端传递的数据是json格式的，所以需要使用@RequestBody来接收
-    public User login(@RequestBody User user) {
-        return userService.login(user);
+    public Result login(@RequestBody LoginDto loginDto) {
+        LoginVo loginVo = userService.login(loginDto);
+        return Result.build(loginVo, ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage());
+    }
+
+    //获取用户信息
+    @GetMapping("/userInfo")
+    public Result getUserInfo(@RequestHeader("token") String token){
+        // 从请求头中获取token
+        // 根据token查询redis获取用户信息
+        User user = userService.getUserInfo(token);
+        // 返回用户信息
+        return Result.build(user, ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage());
+    }
+    //退出登录
+    @GetMapping("/logout")
+    public Result logout(@RequestHeader("token") String token){
+        // 从请求头中获取token
+        // 删除redis中的token
+        userService.logout(token);
+        return Result.build(null, ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage());
     }
 
     //新增和修改

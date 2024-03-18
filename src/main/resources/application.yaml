@@ -5,7 +5,9 @@ spring:
     username: root
     password: yhh
     #password: 123
-
+  redis:
+    host: ubuntu22
+    port: 6379
 #  security:
 #    basic:
 #      path: /swagger-ui.html

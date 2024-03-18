@@ -2,6 +2,7 @@ package com.yhh.springboot_hbase_ifc.model.vo;
 
 public enum ResultCodeEnum {
     SUCCESS(200, "成功"),
+    LOGIN_FAIL(201, "用户名或密码错误"),
     FAIL(500, "失败"),
     UNAUTHORIZED(401, "未认证"),
     NOT_FOUND(404, "未找到"),

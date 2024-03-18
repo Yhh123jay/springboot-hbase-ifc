@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yhh.springboot_hbase_ifc.mapper.UserMapper">
+<mapper namespace="com.yhh.springboot_hbase_ifc.mapper.system.UserMapper">
     <update id="updateUser">
         update user_info
         <set>

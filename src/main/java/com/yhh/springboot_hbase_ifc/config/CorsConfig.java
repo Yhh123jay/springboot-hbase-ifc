@@ -1,14 +1,16 @@
 package com.yhh.springboot_hbase_ifc.config;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Component
 public class CorsConfig implements WebMvcConfigurer {
      @Override
      public void addCorsMappings(CorsRegistry registry) {
          registry.addMapping("/**")
                  // 表明允许哪些域访问, 简单点可为 *
-                 .allowedOrigins("/5000")
+                 .allowedOrigins("http://localhost:5000")
                  .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
                  .allowedHeaders("*")
                  .allowedMethods("*")

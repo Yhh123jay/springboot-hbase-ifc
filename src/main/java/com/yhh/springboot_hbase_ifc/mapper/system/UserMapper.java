@@ -1,4 +1,4 @@
-package com.yhh.springboot_hbase_ifc.mapper;
+package com.yhh.springboot_hbase_ifc.mapper.system;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yhh.springboot_hbase_ifc.model.entity.User;
@@ -32,4 +32,6 @@ public interface UserMapper extends BaseMapper<User> {
     //分页查询数据
     @Select("select * from user_info limit #{pageNum},#{pageSize}")
     List<User> selectUserByPage(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize);
+    @Select("select * from user_info where username = #{username}")
+    User selectUserInfoByUsername(String username);
 }
