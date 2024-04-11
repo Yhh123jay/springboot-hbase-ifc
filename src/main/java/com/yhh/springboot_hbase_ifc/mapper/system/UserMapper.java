@@ -2,13 +2,10 @@ package com.yhh.springboot_hbase_ifc.mapper.system;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yhh.springboot_hbase_ifc.model.entity.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
     //查询所有用户
     @Select("select * from user_info")

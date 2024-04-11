@@ -1,20 +1,20 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2b8
-    username: root
-    password: yhh
-    #password: 123
+    db1:
+      #mysql数据源
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2b8
+      username: root
+      password: yhh
+      #password: 123(loptop)/123456(docker)
+    db2:
+      #phoenix数据源
+      driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
+      jdbc-url: jdbc:phoenix:hadoop102,hadoop103,hadoop104:2181
+
   redis:
     host: ubuntu22
     port: 6379
-#  security:
-#    basic:
-#      path: /swagger-ui.html
-#      enabled: true
-#    user:
-#      name: admin #账号
-#      password: 123456  #密码
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml #扫描所有mybatis的所有xml文件
