@@ -28,5 +28,10 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
-
+    // 类似地，为db3配置 DataSource、SqlSessionFactory 和 TransactionManager
+    @Bean(name = "db3DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.db3")
+    public DataSource db3DataSource() {
+        return DataSourceBuilder.create().build();
+    }
 }

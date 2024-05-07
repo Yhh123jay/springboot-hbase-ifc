@@ -17,6 +17,15 @@ model：定义实体类
 	--entity：对应数据库表
 	--vo：对应发给前端的数据类
 	--dto：对应接收前端的数据类
+config: 配置类
+controller：控制器类
+exception: 异常处理类
+mapper:mapper接口
+    --system
+    --phoenix
+    --clickhouse
+service: 服务层
+utils: 工具类
 ```
 
 
@@ -102,15 +111,47 @@ public class LoginVo {
 
 #### 3 用户数据库设计
 
+数据库表设计原则
+
+```
+一对一，唯一外键：（外键加一个唯一性约束）
+
+一对多，两张表，多的表加外键
+
+多对多，三张表，关系表加外键
+```
+
 使用mysql来存储用户信息，用户主要有以下表，`用户表、角色表、用户-角色关系表`，如果还要权限的话，就需要`权限表和权限-角色表`。
+
+用户表
+
+角色表
+
+菜单表
+
+#### 4 项目管理
+
+建养一体化系统应包含项目管理功能，包括项目创建，项目删除，项目信息编辑。
+
+项目数据库表设计
+
+
 
 ### 3.2、BIM数据存储
 
+#### 1 BIM数据存储
+
 BIM数据主要存储在HBase数据库中，现在已经利用ifcopenshell将ifc文件存储进HBase中，但仍有以下问题：
+
+#### 2 BIM数据提取
 
 1、如何从HBase中提取数据？
 
-使用springboot连接hbase
+(1)使用springboot连接hbase
+
+使用springboot-hbase-starter来链接HBase
+
+springboot-hbase-starter可以使用预定义的schema来对hbase进行操作，这个phoenix已经可以实现了，所以直接使用其提供的`HbaseTemplate.getConnection()`来进行操作。不可以满足需求的可以使用hbaseTemplate暴露出来的getConnection()方法。
 
 2、从HBase中提取的IFC数据有用吗？
 
@@ -118,26 +159,55 @@ BIM数据主要存储在HBase数据库中，现在已经利用ifcopenshell将ifc
 
 或者通过查询rowkey来与EBS进行关联。
 
-3、需要搭建实时数仓吗？
+为了模型渲染效果，使用fragments轻量化模型，这时IFC数据就有用了。
 
-搭建实时数仓是比较多余的，只需要加入一个Kafka做为消息中间件就够了。
 
-![image-20240319213908796](README.assets/image-20240319213908796.png)
 
 ### 3.3、监测数据存储
 
 监测数据传输主要是根据文献中这一解决方案。现阶段主要是无法进行现场实验，相关接口和传感网络无法搭建。
 
+需要搭建实时数仓吗？
+
+搭建实时数仓是比较多余的，只需要加入一个Kafka做为消息中间件就够了。
+
+![image-20240319213908796](E:/javacode/springboot-hbase-ifc/README.assets/image-20240319213908796.png)
+
 监测数据也是存储在HBase中，通过kafka作为中间件存入。
 
 ![监测传感网络](README.assets/image-20240319202206917.png)
 
-### 3.4 
+#### 1 传感器数据库设计
+ER图
+
+传感器类型：
+
+温度传感器
+
+加速度传感器
+
+速度传感器
+
+应变传感器
+
+传感器表设计：
 
 
+
+#### 2 传感网络搭建--大数据方式
+kafka2hbase项目
+
+### 3.4 文档管理
+
+使用hadoop的api实现文档管理
+
+### 3.5、养护管理
+
+使用工作流实现
 
 ### 3.6、监测预警
 
+使用python进行深度学习训练模型，然后通过消息队列来进行服务调用。
 
 
 ## 4、系统部署

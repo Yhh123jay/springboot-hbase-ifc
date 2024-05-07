@@ -3,14 +3,18 @@ spring:
     db1:
       #mysql数据源
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2b8
+      jdbc-url: jdbc:mysql://192.168.10.128:3306/db01?serverTimezone=GMT%2b8
       username: root
-      password: yhh
+      password: 123456
       #password: 123(loptop)/123456(docker)
     db2:
       #phoenix数据源
       driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
       jdbc-url: jdbc:phoenix:hadoop102,hadoop103,hadoop104:2181
+    db3:
+      #clickhouse数据源
+      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
+      jdbc-url: jdbc:clickhouse://192.168.10.128:8123/default
 
   redis:
     host: ubuntu22
@@ -18,8 +22,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml #扫描所有mybatis的所有xml文件
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印sql语句
+    map-underscore-to-camel-case: true # 开启驼峰命名

@@ -27,6 +27,6 @@ public class User {
     private String phone;
     private String address;
     //指定数据库的字段名称,驼峰命名也可以
-    @TableField(value = "creat_time")
+    @TableField(value = "create_time")
     private Date creat_time;
 }

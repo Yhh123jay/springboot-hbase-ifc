@@ -7,7 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.Map;
 
-
+//JWT工具类
 public class JWTUtils {
     // string
     /**
