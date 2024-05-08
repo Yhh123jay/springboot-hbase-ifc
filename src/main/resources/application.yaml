@@ -15,10 +15,11 @@ spring:
       #clickhouse数据源
       driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
       jdbc-url: jdbc:clickhouse://192.168.10.128:8123/default
-
   redis:
     host: ubuntu22
     port: 6379
+  hadoop:
+    fs-uri: hdfs://hadoop102:8020
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml #扫描所有mybatis的所有xml文件
@@ -28,3 +29,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印sql语句
     map-underscore-to-camel-case: true # 开启驼峰命名
+hadoop:
+  name-node: hdfs://hadoop102:8020
+  directory-path: /data

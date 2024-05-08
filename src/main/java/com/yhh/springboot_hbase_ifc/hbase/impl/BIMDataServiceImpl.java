@@ -9,10 +9,9 @@ import java.io.IOException;
 
 /**
  * 从hbase中查询IFC数据
- * 难以真正的应用到实际中
  * 可能的应用：
  * 1、重新生成ifc文件
- * 2、提取子模型
+ * 2、提取子模型--根据MVD
  * 3、提取模型信息--根据EBS编码提取构件信息
  */
 @Service
