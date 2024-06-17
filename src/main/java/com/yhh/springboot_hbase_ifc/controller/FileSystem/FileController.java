@@ -2,12 +2,19 @@ package com.yhh.springboot_hbase_ifc.controller.FileSystem;
 
 import com.yhh.springboot_hbase_ifc.FileSystem.HadoopClient;
 import com.yhh.springboot_hbase_ifc.FileSystem.util.FileUtil;
+import com.yhh.springboot_hbase_ifc.exception.GuiguException;
 import com.yhh.springboot_hbase_ifc.model.vo.Result;
+import com.yhh.springboot_hbase_ifc.model.vo.ResultCodeEnum;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -97,10 +104,31 @@ public class FileController {
      * 读取文件内容
      */
     @GetMapping("readFile")
-    public Result<Object> readFile(@RequestParam String filePath) {
-        return Result.build((Object) hadoopClient.readFile(filePath), 200, "读取成功");
+    public Result<String> readFile(@RequestParam String filePath) {
+        return Result.build(hadoopClient.readFile(filePath), 200, "读取成功");
     }
+    /**
+     * 读取文件内容byte方式
+     */
+    @GetMapping("readFileByte")
+    public Result<byte[]> readFileByte(@RequestParam("filePath") String filePath) {
+        byte[] fileBytes = hadoopClient.readFileByte(filePath);
+        if (fileBytes != null) {
+            try {
+                // 设置头部
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.setContentDispositionFormData("attachment", URLEncoder.encode(filePath, "UTF-8"));
 
+                return Result.build(fileBytes,200, "下载成功");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Result.build(null, 202, "下载失败");
+            }
+        } else {
+            return Result.build(null, 404, "Not Found");
+        }
+    }
     /**
      * 文件或文件夹重命名
      */
@@ -131,7 +159,7 @@ public class FileController {
      * 复制文件
      */
     @PostMapping("copyFile")
-    public Result<?> copyFile(String sourcePath, String targetPath) {
+    public Result<?> copyFile(@RequestParam String sourcePath, @RequestParam String targetPath) {
         hadoopClient.copyFile(sourcePath, targetPath);
         return Result.build(null, 200, "复制成功");
     }

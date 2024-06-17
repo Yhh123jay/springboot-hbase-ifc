@@ -38,7 +38,7 @@ public class HadoopConfig {
         FileSystem fs = null;
         try {
             URI uri = new URI(hadoopProperties.getDirectoryPath().trim());
-            fs = FileSystem.get(uri, this.getConfiguration(hadoopProperties));
+            fs = FileSystem.get(uri, this.getConfiguration(hadoopProperties), hadoopProperties.getUser());
         } catch (Exception e) {
             log.error("【FileSystem配置初始化失败】", e);
         }

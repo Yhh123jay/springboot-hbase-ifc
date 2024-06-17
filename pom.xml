@@ -21,12 +21,16 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-common</artifactId>
                 <version>${hadoop.version}</version>
-        </dependency>
-<!--        引入hadoop-yarn-common-->
-        <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-yarn-common</artifactId>
-                <version>${hadoop.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 <!--        引入hadoop-client-->
         <dependency>
@@ -61,13 +65,13 @@
                 </exclusions>
         </dependency>
 <!--        引入spring-data-hadoop-boot-->
-        <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-hadoop-boot</artifactId>
-                <version>2.5.0.RELEASE</version>
-        </dependency>
+<!--        <dependency>-->
+<!--                <groupId>org.springframework.data</groupId>-->
+<!--                <artifactId>spring-data-hadoop-boot</artifactId>-->
+<!--                <version>2.5.0.RELEASE</version>-->
+<!--        </dependency>-->
 
-
+<!--        引入Hbase依赖-->
 <!--        引入hbase stater-->
         <dependency>
             <groupId>com.spring4all</groupId>
@@ -105,6 +109,37 @@
             <version>5.1.2</version>
         </dependency>
 
+        <!--        引入MybatisPlus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <!--        数据库连接池，Hikari-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!--        配置多数据源-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.baomidou</groupId>-->
+        <!--            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+        <!--            <version>3.1.0</version>-->
+        <!--        </dependency>-->
+        <!-- 引入mysql驱动-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!--引入clickhouse驱动-->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>0.2.4</version>
+        </dependency>
+
+<!--        引入IFCToolBox-->
 <!--        引入外部jar包，ifctoolbox-->
         <dependency>
             <groupId>com.apstex</groupId>
@@ -122,6 +157,7 @@
             <systemPath>${project.basedir}/src/main/resources/lib/com.apstex.stepparser_4.5.1_20200406.jar</systemPath>
         </dependency>
 
+<!--    引入系统基本模块-->
 <!--        引入web模块-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -146,42 +182,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--       使用log4j2日志-->
+<!--       使用log4j2日志-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-
-<!--        引入MybatisPlus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-<!--        数据库连接池，Hikari-->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency>
-<!--        配置多数据源-->
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--        </dependency>-->
-        <!-- 引入mysql驱动-->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!--引入clickhouse驱动-->
-        <dependency>
-            <groupId>ru.yandex.clickhouse</groupId>
-            <artifactId>clickhouse-jdbc</artifactId>
-            <version>0.2.4</version>
-        </dependency>
-
 <!--        引入lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -200,6 +205,8 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+<!--        引入权限管理依赖-->
 <!--        引入security-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->

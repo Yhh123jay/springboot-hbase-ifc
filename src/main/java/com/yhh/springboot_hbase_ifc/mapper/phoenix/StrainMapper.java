@@ -13,7 +13,11 @@ public interface StrainMapper {
     int insertStrain(Strain strain);
 
     // 查询最后10行数据
-    @Select("SELECT * FROM \"strain_sensing\" ORDER BY \"id\" DESC LIMIT 10")
+    @Select("SELECT * FROM \"strain_sensing\" ORDER BY \"id\" DESC LIMIT 100")
     List<Strain> selectLast10();
+
+    // 查询最后win_size行数据
+    @Select("SELECT * FROM \"strain_sensing\" ORDER BY \"id\" DESC LIMIT #{win_size}")
+    List<Strain> selectLastWinSize(int win_size);
 
 }

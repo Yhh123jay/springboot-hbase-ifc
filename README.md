@@ -26,6 +26,8 @@ mapper:mapper接口
     --clickhouse
 service: 服务层
 utils: 工具类
+hbase:直接调用hbase的类（不借助于phoenix）
+FileSystem：文件系统类，与hbase一样，提供service给controller调用
 ```
 
 
@@ -36,7 +38,7 @@ utils: 工具类
 
 
 ## 3、系统功能
-### 3.1 系统基本功能
+### 3.1、 系统基本功能
 #### 1 登录功能实现
 
 1、接口和数据格式设计
@@ -135,6 +137,8 @@ public class LoginVo {
 
 项目数据库表设计
 
+此次应包含三个项目：观音寺大桥项目，中法友谊大桥项目，缩尺模型斜拉桥项目
+
 
 
 ### 3.2、BIM数据存储
@@ -147,11 +151,13 @@ BIM数据主要存储在HBase数据库中，现在已经利用ifcopenshell将ifc
 
 1、如何从HBase中提取数据？
 
-(1)使用springboot连接hbase
+使用springboot连接hbase
 
 使用springboot-hbase-starter来链接HBase
 
-springboot-hbase-starter可以使用预定义的schema来对hbase进行操作，这个phoenix已经可以实现了，所以直接使用其提供的`HbaseTemplate.getConnection()`来进行操作。不可以满足需求的可以使用hbaseTemplate暴露出来的getConnection()方法。
+springboot-hbase-starter可以使用预定义的schema来对hbase进行操作，这个phoenix已经可以实现了，
+
+所以直接使用其提供的`HbaseTemplate.getConnection()`来进行操作。不可以满足需求的可以使用hbaseTemplate暴露出来的getConnection()方法。
 
 2、从HBase中提取的IFC数据有用吗？
 
@@ -161,7 +167,7 @@ springboot-hbase-starter可以使用预定义的schema来对hbase进行操作，
 
 为了模型渲染效果，使用fragments轻量化模型，这时IFC数据就有用了。
 
-
+3、提供提取数据的api接口
 
 ### 3.3、监测数据存储
 
@@ -180,26 +186,64 @@ springboot-hbase-starter可以使用预定义的schema来对hbase进行操作，
 #### 1 传感器数据库设计
 ER图
 
+<img src="assets/1716794811509.png" style="zoom:80%" />
+
 传感器类型：
 
-温度传感器
+温度传感器、加速度传感器、速度传感器、应变传感器
 
-加速度传感器
+![1715694873552](E:\javacode\springboot-hbase-ifc\assets\1715694873552.png)
 
-速度传感器
 
-应变传感器
+
+采集站：
+
+![1715694857135](E:\javacode\springboot-hbase-ifc\assets\1715694857135.png)
+
+采集仪：
+
+![1715694973770](E:\javacode\springboot-hbase-ifc\assets\1715694973770.png)
 
 传感器表设计：
+
+| 字段 | 数据类型 |   说明   |
+| :--: | :------: | :------: |
+|  id  |   int    | 传感器id |
+|      |          |          |
+|      |          |          |
+|      |          |          |
+|      |          |          |
+|      |          |          |
+|      |          |          |
+
+采集仪表设计：
+
+| 字段 | 数据类型 | 说明 |
+| ---- | -------- | ---- |
+|      |          |      |
+|      |          |      |
+|      |          |      |
+
+采集站表设计：
+
+| 字段 | 数据类型 | 说明 |
+| ---- | -------- | ---- |
+|      |          |      |
+|      |          |      |
+|      |          |      |
 
 
 
 #### 2 传感网络搭建--大数据方式
-kafka2hbase项目
+利用springboot搭建了一个kafka2hbase项目
 
-### 3.4 文档管理
+#### 3 监测数据接口
 
-使用hadoop的api实现文档管理
+通过mybatis的多数据源配置连接HBase和ClickHouse来读取数据，提供数据读取的接口
+
+### 3.4、文档管理
+
+使用hadoop的api实现文档管理（已完成）
 
 ### 3.5、养护管理
 
@@ -207,7 +251,7 @@ kafka2hbase项目
 
 ### 3.6、监测预警
 
-使用python进行深度学习训练模型，然后通过消息队列来进行服务调用。
+使用python进行深度学习训练模型，然后通过python的web框架提供接口来进行服务调用。
 
 
 ## 4、系统部署

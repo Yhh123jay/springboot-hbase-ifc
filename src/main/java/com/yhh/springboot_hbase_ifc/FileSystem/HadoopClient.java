@@ -7,9 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +22,9 @@ import java.util.Map;
 @Slf4j
 @AllArgsConstructor
 public class HadoopClient {
-
+    /**
+     * 通过构造器注入
+     */
     private FileSystem fs;
     private HadoopProperties hadoopProperties;
 
@@ -176,7 +182,7 @@ public class HadoopClient {
     }
 
     /**
-     * 获取目录下文件列表
+     * 获取目录下文件列表,迭代获取
      *
      * @param path 目录路径
      * @return {@link List}
@@ -201,7 +207,6 @@ public class HadoopClient {
         }
         return list;
     }
-
     /**
      * 读取文件内容
      *
@@ -243,6 +248,22 @@ public class HadoopClient {
         }
         return buffer.toString();
     }
+    /**
+     * 读取文件内容byte方式
+     *
+     * @param filePath 文件路径
+     */
+    public byte[] readFileByte(String filePath) {
+        log.info("【读取文件内容1】 开始读取, 文件路径: {}", filePath);
+        Path newPath = new Path(filePath);
+        try (InputStream in = fs.open(newPath)) {
+            return IOUtils.readFullyToByteArray((DataInput) in);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // 或者根据情况处理异常
+        }
+    }
+
 
     /**
      * 文件或文件夹重命名

@@ -8,5 +8,4 @@ public class SpringbootHbaseIfcApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootHbaseIfcApplication.class, args);
     }
-
 }

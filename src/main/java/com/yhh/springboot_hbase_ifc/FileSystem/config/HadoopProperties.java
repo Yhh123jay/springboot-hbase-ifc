@@ -12,6 +12,8 @@ public class HadoopProperties {
     private String nameNode = "hdfs://127.0.0.1:9000/";
     /** 默认文件夹 */
     private String directoryPath = "/";
+    /** 默认用户 */
+    private String user = "yhh";
 
     public String getDirectoryPath() {
         StringBuilder sb = new StringBuilder(directoryPath);

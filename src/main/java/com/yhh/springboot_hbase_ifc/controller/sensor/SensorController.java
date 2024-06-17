@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/sensor")
 public class SensorController {
     private final CHStrainServiceImpl strainService;
+
     //通过构造函数注入
     public SensorController(CHStrainServiceImpl strainService) {
         this.strainService = strainService;

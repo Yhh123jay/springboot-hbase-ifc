@@ -18,8 +18,8 @@ spring:
   redis:
     host: ubuntu22
     port: 6379
-  hadoop:
-    fs-uri: hdfs://hadoop102:8020
+#  hadoop:
+#    fs-uri: hdfs://hadoop102:8020
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml #扫描所有mybatis的所有xml文件
@@ -32,3 +32,4 @@ mybatis-plus:
 hadoop:
   name-node: hdfs://hadoop102:8020
   directory-path: /data
+  user: yhh
