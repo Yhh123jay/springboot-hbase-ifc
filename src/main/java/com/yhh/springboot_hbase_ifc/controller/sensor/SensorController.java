@@ -27,5 +27,4 @@ public class SensorController {
         List<CHStrain> strain_data = strainService.selectBySensing(sensing);
         return Result.build(strain_data, ResultCodeEnum.SUCCESS);
     }
-
 }

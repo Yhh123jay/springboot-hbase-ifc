@@ -28,15 +28,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class FileController {
 
+    //通过构造函数注入HadoopClient
     private HadoopClient hadoopClient;
 
     /**
      * 上传文件
      */
     @PostMapping("upload")
-    public Result<?> upload(@RequestParam String uploadPath, MultipartFile file) {
-        hadoopClient.copyFileToHDFS(false, true, FileUtil.multipartFileToFile(file).getPath(), uploadPath);
-        return Result.build(null, 200, "上传成功");
+    public Result<String> upload(@RequestParam String uploadPath, MultipartFile file) {
+        hadoopClient.copyFileToHDFS(true, true, FileUtil.multipartFileToFile(file).getPath(), uploadPath);
+        return Result.build(uploadPath + file.getOriginalFilename(), 200, "上传成功");
     }
 
     /**

@@ -8,12 +8,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
+    @Bean(name = "flowableDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.flowable")
+    @Primary
+    public DataSource flowableDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean(name = "db1DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.db1")
@@ -34,4 +41,5 @@ public class DataSourceConfig {
     public DataSource db3DataSource() {
         return DataSourceBuilder.create().build();
     }
+
 }

@@ -28,6 +28,7 @@ service: 服务层
 utils: 工具类
 hbase:直接调用hbase的类（不借助于phoenix）
 FileSystem：文件系统类，与hbase一样，提供service给controller调用
+flowable: 流程引擎类
 ```
 
 
@@ -243,11 +244,13 @@ ER图
 
 ### 3.4、文档管理
 
-使用hadoop的api实现文档管理（已完成）
+使用hadoop的api实现文档管理（已完成）。
 
 ### 3.5、养护管理
 
-使用工作流实现
+使用工作流实现，通过整合flowable来实现养护管理。
+
+首先使用flowable-ui设计流程图,springboot整合flowable-starter提供响应的api，前端创建相关页面进行展示。
 
 ### 3.6、监测预警
 
@@ -260,7 +263,7 @@ ER图
 hadoop集群搭建
 zookeeper集群搭建
 hbase数据库搭建
-karaf集群搭建
+kafaka集群搭建
 flink集群搭建
 
 #### 4.1.2、springboot环境搭建

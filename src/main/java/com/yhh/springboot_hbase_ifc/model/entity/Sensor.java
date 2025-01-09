@@ -22,5 +22,4 @@ public class Sensor {
     //传输方式：4G/无线/物联网技术
     private String signal;
     private String EBSCode;
-
 }

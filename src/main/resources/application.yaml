@@ -1,5 +1,11 @@
 spring:
   datasource:
+    flowable:
+      #flowable数据源
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.10.128:3306/flowable?serverTimezone=GMT%2b8&nullCatalogMeansCurrent=true
+      username: root
+      password: 123456
     db1:
       #mysql数据源
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,11 +21,10 @@ spring:
       #clickhouse数据源
       driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
       jdbc-url: jdbc:clickhouse://192.168.10.128:8123/default
+
   redis:
     host: ubuntu22
     port: 6379
-#  hadoop:
-#    fs-uri: hdfs://hadoop102:8020
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml #扫描所有mybatis的所有xml文件
@@ -33,3 +38,7 @@ hadoop:
   name-node: hdfs://hadoop102:8020
   directory-path: /data
   user: yhh
+
+flowable:
+  async-executor-activate: false #关闭定时任务Job
+  database-schema-update: true

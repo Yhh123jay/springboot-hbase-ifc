@@ -22,7 +22,7 @@ public class DB1SourceConfig {
     private DataSource db1DataSource;
 
     @Bean(name = "db1SqlSessionFactory")
-    @Primary
+    //@Primary
     public SqlSessionFactory db1SqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(db1DataSource);
@@ -31,13 +31,13 @@ public class DB1SourceConfig {
     }
 
     @Bean(name = "db1TransactionManager")
-    @Primary
+    //@Primary
     public DataSourceTransactionManager db1TransactionManager(@Qualifier("db1DataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "db1SqlSessionTemplate")
-    @Primary
+    //@Primary
     public SqlSessionTemplate db1SqlSessionTemplate() throws Exception {
         return new SqlSessionTemplate(db1SqlSessionFactory());
     }

@@ -2,6 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yhh.springboot_hbase_ifc.mapper.clickhouse.StrainMapper">
+<mapper namespace="com.yhh.springboot_hbase_ifc.mapper.clickhouse.CHStrainMapper">
 
 </mapper>

@@ -115,10 +115,10 @@ public class HBaseClient {
     }
     /**
      * delete 'tableName','rowKey','columnFamily:column'
-     * @param tableName
-     * @param rowKey
-     * @param columnFamily
-     * @param column
+     * @param tableName 表名
+     * @param rowKey 行键
+     * @param columnFamily 列族名
+     * @param column 列名
      * @throws IOException
      */
     public void deleteColumn(String tableName, String rowKey, String columnFamily, String column) throws IOException {

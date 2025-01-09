@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    //全局异常处理
+    //全局异常处理,，可以捕获所有控制器的异常
     // @ExceptionHandler注解用来指定处理的异常类型
     // 如果这个异常类型发生了，就会调用这个方法
     @ExceptionHandler(Exception.class)

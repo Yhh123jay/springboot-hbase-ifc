@@ -4,19 +4,17 @@ import com.apstex.ifc4x2toolbox.ifc4x2.IfcBridge;
 import com.apstex.ifc4x2toolbox.ifc4x2.IfcProduct;
 import com.apstex.ifc4x2toolbox.ifcmodel.IfcModel;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@SpringBootTest
 public class ifctoolboxTest {
-
     @Test
     public void test() {
         IfcModel model = new IfcModel();
-        File file = new File("D:\\model\\4.2\\bridge.ifc");
+        File file = new File("E:\\桥梁模型\\bridge-bcw.ifc");
         try {
             model.readStepFile(file);
         } catch (Exception e) {

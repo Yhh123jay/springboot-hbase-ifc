@@ -16,6 +16,7 @@ public class AnomalyDetection {
     //从数据库中查询数据，调用FastAPI接口进行异常检测，返回结果
     //每10分钟检测一次
     public String anomalyDetection(String data) {
+        //请求python端接口
         String url = "http://localhost:8001/predict/";
 
         RestTemplate restTemplate = new RestTemplate();

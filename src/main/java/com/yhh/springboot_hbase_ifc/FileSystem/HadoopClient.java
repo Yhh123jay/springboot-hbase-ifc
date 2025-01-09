@@ -131,7 +131,7 @@ public class HadoopClient {
      */
     public void download(String path, String fileName, OutputStream outputStream) throws IOException {
         log.info("【下载文件】 开始下载, 下载文件名称: {}", fileName);
-        @Cleanup InputStream is = fs.open(new Path(path + fileName));
+        @Cleanup InputStream is = fs.open(new Path(path +'/'+ fileName));
         IOUtils.copyBytes(is, outputStream, 4096, true);
     }
 
