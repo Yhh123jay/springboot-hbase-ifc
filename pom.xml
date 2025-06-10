@@ -233,6 +233,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.78</version>
         </dependency>
+
 <!--        引入权限管理依赖-->
 <!--        引入security-->
 <!--        <dependency>-->

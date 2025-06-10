@@ -17,15 +17,12 @@ public class AnomalyDetection {
     //每10分钟检测一次
     public String anomalyDetection(String data) {
         //请求python端接口
-        String url = "http://localhost:8001/predict/";
-
+        String url = "http://localhost:8001/detect/";
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         JSONObject request = new JSONObject();
-        //从Phoenix中查询数据
+        //从CliHouse中查询数据
 
         request.put("data", data);
 

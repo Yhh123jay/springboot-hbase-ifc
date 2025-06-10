@@ -27,7 +27,7 @@ public class BIMDataServiceImpl implements BIMDataService {
     //根据EBS编码提取构建的信息，根据rowkey的前缀和Ifc实体进行查询
     //HBase查询可以通过前缀进行查询，例如：
     //hbase(main):001:0> scan 't1'
-    //scan 't1',{FILTER=>"PrefixFilter('2015')"}
+    //scan 't1',{FILTER=>"PrefixFilter('ifcbridge_XL-0101-0001-GUID')"}
     public String selectBIMDataByEBS(String tableName, String ebsCode) {
         try {
             //ebs编码是rowkey的前缀

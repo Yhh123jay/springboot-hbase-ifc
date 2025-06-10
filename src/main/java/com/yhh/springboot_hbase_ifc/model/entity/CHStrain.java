@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+//应变传感器实体类
 public class CHStrain {
     //id
     private Long id;

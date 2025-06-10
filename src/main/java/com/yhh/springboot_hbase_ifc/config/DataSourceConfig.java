@@ -41,5 +41,4 @@ public class DataSourceConfig {
     public DataSource db3DataSource() {
         return DataSourceBuilder.create().build();
     }
-
 }
